@@ -1,0 +1,15 @@
+[
+  { "keys": ["ctrl+'", "<character>"], "command": "jump_prepare" },
+
+  {
+    "keys": ["<character>"],
+    "command": "jump",
+    "context": [
+      {
+        "key": "setting.jumping",
+        "operator": "equal",
+        "operand": true
+      }
+    ]
+  }
+]
