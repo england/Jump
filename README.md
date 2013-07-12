@@ -11,6 +11,6 @@ Sublime Text 3 motion plugin
     
 ### Default keymap
 
-`ctrl+'` prepare jump
+`ctrl+'`, `<character>` prepare jump
 
 `<character>` jump
