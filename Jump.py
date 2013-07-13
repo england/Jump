@@ -13,6 +13,8 @@ SPECIAL_CHARACTERS = [
 
 ]
 
+# WTF: undo command doesn't work if it is invoked from TextCommand context
+
 class JumpPrepareCommand(sublime_plugin.TextCommand):
   def run(self, edit, character=None):
     # clear old placeholer positions
@@ -21,14 +23,12 @@ class JumpPrepareCommand(sublime_plugin.TextCommand):
     placeholder_regions = []
     current_character_placeholder_id = 0
 
-    view = sublime.active_window().active_view()
-
     # set "jumping" flag for key binding context
-    view.settings().set('jumping', True)
-    view.set_status('jumping', 'Jumping')
+    self.view.settings().set('jumping', True)
+    self.view.set_status('jumping', 'Jumping')
 
-    visible_region = view.visible_region()
-    visible_text = view.substr(visible_region)
+    visible_region = self.view.visible_region()
+    visible_text = self.view.substr(visible_region)
     visible_region_offset = visible_region.begin()
 
     if character in SPECIAL_CHARACTERS:
@@ -48,7 +48,7 @@ class JumpPrepareCommand(sublime_plugin.TextCommand):
       placeholder_regions.append(placeholder_region)
 
       # replace with character from placeholder dictionary
-      view.replace(edit, placeholder_region,
+      self.view.replace(edit, placeholder_region,
         placeholder_dictionary[current_character_placeholder_id])
 
       # store absolute position of placeholder character
@@ -57,7 +57,7 @@ class JumpPrepareCommand(sublime_plugin.TextCommand):
 
       current_character_placeholder_id += 1
 
-    view.add_regions('jumping', placeholder_regions, 'string')
+    self.view.add_regions('jumping', placeholder_regions, 'string')
 
 class JumpCommand(sublime_plugin.WindowCommand):
   def run(self, character):
