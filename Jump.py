@@ -25,6 +25,7 @@ class JumpPrepareCommand(sublime_plugin.TextCommand):
 
     # set "jumping" flag for key binding context
     view.settings().set('jumping', True)
+    view.set_status('jumping', 'Jumping')
 
     visible_region = view.visible_region()
     visible_text = view.substr(visible_region)
@@ -65,6 +66,7 @@ class JumpCommand(sublime_plugin.WindowCommand):
     self.window.active_view().run_command("undo")
 
     view.settings().set('jumping', False)
+    view.set_status('jumping', '')
 
     if character in placeholer_positions:
       view.sel().clear()
@@ -77,3 +79,4 @@ class JumpCancelCommand(sublime_plugin.WindowCommand):
     view.run_command('undo')
 
     view.settings().set('jumping', False)
+    view.set_status('jumping', '')
