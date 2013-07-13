@@ -6,6 +6,13 @@ placeholder_dictionary = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQR
 # FIXME: variable shared across all windows
 placeholer_positions = {}
 
+SPECIAL_CHARACTERS = [
+  '[', ']',
+  '(', ')',
+  '\\', '+', '*', '^', '$', '?', '|',  '.'
+
+]
+
 class JumpPrepareCommand(sublime_plugin.TextCommand):
   def run(self, edit, character=None):
     # clear old placeholer positions
@@ -22,6 +29,9 @@ class JumpPrepareCommand(sublime_plugin.TextCommand):
     visible_region = view.visible_region()
     visible_text = view.substr(visible_region)
     visible_region_offset = visible_region.begin()
+
+    if character in SPECIAL_CHARACTERS:
+      character = '\\' + character
 
     # iterate all matched characters in visible region
     for character_position in (match.start() for match in re.finditer(character, visible_text)):
