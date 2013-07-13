@@ -16,4 +16,5 @@ Sublime Text 3 motion plugin
 and now:
 
 `<character>` jump
+
 `escape` calcel jump
