@@ -63,7 +63,7 @@ class JumpCommand(sublime_plugin.WindowCommand):
   def run(self, character):
     view = self.window.active_view()
 
-    self.window.active_view().run_command("undo")
+    view.run_command("undo")
 
     view.settings().set('jumping', False)
     view.set_status('jumping', '')
