@@ -63,10 +63,7 @@ class JumpCommand(sublime_plugin.WindowCommand):
   def run(self, character):
     view = self.window.active_view()
 
-    view.run_command("undo")
-
-    view.settings().set('jumping', False)
-    view.set_status('jumping', '')
+    cancelJumpState(view)
 
     if character in placeholer_positions:
       view.sel().clear()
@@ -74,9 +71,9 @@ class JumpCommand(sublime_plugin.WindowCommand):
 
 class JumpCancelCommand(sublime_plugin.WindowCommand):
   def run(self):
-    view = self.window.active_view()
+    cancelJumpState(self.window.active_view())
 
-    view.run_command('undo')
-
-    view.settings().set('jumping', False)
-    view.set_status('jumping', '')
+def cancelJumpState(view):
+  view.run_command("undo")
+  view.settings().set('jumping', False)
+  view.set_status('jumping', '')
