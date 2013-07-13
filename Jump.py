@@ -1,7 +1,7 @@
 import sublime, sublime_plugin
 import re
 
-# TODO: move to config
+# TODO: move to settings
 placeholder_dictionary = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 # FIXME: variable shared across all windows
 placeholer_positions = {}
@@ -17,7 +17,7 @@ SPECIAL_CHARACTERS = [
 
 class JumpPrepareCommand(sublime_plugin.TextCommand):
   def run(self, edit, character=None):
-    # clear old placeholer positions
+    # clear old placeholder positions
     placeholer_positions.clear()
 
     placeholder_regions = []
