@@ -11,5 +11,17 @@
         "operand": true
       }
     ]
+  },
+
+  {
+    "keys": ["escape"],
+    "command": "jump_cancel",
+    "context": [
+      {
+        "key": "setting.jumping",
+        "operator": "equal",
+        "operand": true
+      }
+    ]
   }
 ]
