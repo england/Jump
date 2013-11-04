@@ -17,4 +17,4 @@ and now:
 
 `<character>` jump
 
-`escape` calcel jump
+`escape` cancel jump
